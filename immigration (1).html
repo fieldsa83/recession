@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Population Changes</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .description { margin-bottom: 20px; line-height: 1; }
+    h1 { 
+      margin: 0; 
+      padding: 0; 
+      line-height: 1.2;
+      font-size: 24px;
+    }
+    .subtitle { 
+      margin: 5px 0 0 0;
+      padding: 0; 
+      line-height: 1.2;
+      font-size: 14px;
+    }
+    .iframe-container {
+      width: 100%;
+      height: 500px; /* Fixed height */
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .source {
+      margin: 5px 0 0 0;
+      padding: 0; 
+      line-height: 1.2;
+      font-size: 14px;
+    }
+    .source-bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="description">
+      <h1>Population, month-to-month change</h1>
+      <p class="subtitle">Canada, 15 years and older, total gender</p>
+    </div>
+    
+    <div class="iframe-container">
+      <iframe src="plot_widget.html"></iframe>
+    </div>
+    
+    <p class="source"><span class="source-bold">Source: </span> Statistics Canada, Labour Force Survey.</p>
+  </div>
+</body>
+</html>
