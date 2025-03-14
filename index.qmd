@@ -4,6 +4,7 @@ format:
   html:
     theme: cosmo
     code-fold: true
+    self-contained: true
 ---
 
 ```{r setup, include=FALSE}
