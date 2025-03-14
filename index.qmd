@@ -11,17 +11,18 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 library(plotly)
 ```
 
-::: {style="font-size: 14pt;font-weight: bold;margin-bottom: 0px; margin-top: 20px"}
-Comparing crises
-:::
-
-::: {style="font-size: 12pt; margin-bottom: 10px; margin-top: 0px"}
+::: {style="font-size: 12pt; font-weight: bold; margin-bottom: 10px; margin-top: 0px"}
 S&P 500 declines indexed from market peaks
 :::
 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
 
 # Source the script that creates the plot
 source("sp500_visualization.R")
 
 # Display the plot
 sp500_plot
+```
