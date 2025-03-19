@@ -41,7 +41,9 @@ jobs:
       run: Rscript sp500_visualization.R
         
     - name: Render Quarto document
-      run: quarto render .
+      run: |
+        quarto render index.qmd
+        quarto render population.qmd
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
