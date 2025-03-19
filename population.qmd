@@ -1,0 +1,128 @@
+---
+title: ""
+format: 
+  html:
+    self-contained: true
+    embed-resources: true
+    fig-responsive: false
+    page-layout: full
+---
+
+<style>
+h3 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  font-size: 24px;
+}
+.subtitle {
+  margin: 5px 0 0 0;
+  padding: 0;
+  line-height: 1.2;
+  font-size: 14px;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(dplyr)
+library(cansim)
+library(plotly)
+library(htmltools)
+```
+
+### Canadian population growth slows following record surge 
+<p class="subtitle">Net change in the number of people, quarter-to-quarter</p>
+```{r}
+#df_pop <- get_cansim_vector("v2062809", start_time = as.Date("2011-12-01"))
+df_pop <- get_cansim_vector("v1", start_time = as.Date("2013-10-01"))
+df_pop_change <- df_pop %>%
+  mutate(
+    DATE = as.Date(Date),
+    CHANGE = (VALUE - lag(VALUE,1))
+  ) %>%
+  select(DATE, CHANGE) %>% 
+  mutate(bar_color = case_when(DATE >= as.Date("2022-03-15") & DATE <= as.Date("2024-06-01") ~ "#a50000",  # Red color for specified date range
+                               DATE >= as.Date("2012-03-15") & DATE <= as.Date("2019-09-01") ~ "darkblue",
+                               TRUE ~ "#c3c8dc"))   # Original color for other dates
+segy <- 460000
+texty <- segy+13000
+plot <- df_pop_change %>%
+  plot_ly(
+    x = ~DATE,
+    y = ~CHANGE,
+    type = "bar",
+    marker = list(color = ~bar_color),  # Use the conditional colors
+    width = 900,
+    height = 475) %>%
+  layout(
+    title = list(text = ""),
+    yaxis = list(
+      title = list(text = "Change",
+                   standoff = 15),
+      font = list(size = 11),
+      range = c(0,499900)
+    ),
+    xaxis = list(
+      title = "",
+      showgrid = FALSE,
+      tickformat = "%Y",  # Changed to show only year
+      tickmode = "array",
+      tickvals = ~ seq.Date(
+        from = as.Date(paste0(format(min(DATE), "%Y"), "-01-01")),
+        to = as.Date(paste0(format(max(DATE), "%Y"), "-01-01")),
+        by = "1 year"
+      ),
+      tickangle = 0,  # Make sure ticks are horizontal
+      ticklen = 5,    # Length of tick marks
+      font = list(size = 10)
+    ),
+    legend = list(orientation = "h", x = 0.0, y = 1.2),
+    margin = list(l=0, r=50, t=0, b=10, pad = 10),
+    hoverlabel=list(bgcolor='rgba(255,255,255,0.75)', font = list(color = "black"))
+  ) %>%
+  config(
+    displayModeBar = FALSE,
+    responsive = TRUE
+  ) %>%
+  add_segments(
+    x = "2013-12-01",    
+    xend = "2019-11-01", 
+    y = segy,
+    yend = segy,
+    line = list(color = "darkblue", width = 2),
+    mode = "lines",
+    inherit = FALSE,
+    showlegend = FALSE
+  ) %>%
+  add_annotations(
+    x = "2013-12-01",     # Left-aligned with start date
+    y = texty,
+    text = "+2.6 million over 6 years (24 quarters)",
+    showarrow = FALSE,
+    xanchor = "left",     # Left-align text
+    font = list(color = "grey20", size = 12)
+    #textangle = -45
+  ) %>%
+  add_segments(
+    x = "2022-05-15",    
+    xend = "2024-08-01", 
+    y = segy,
+    yend = segy,
+    line = list(color = "#a50000", width = 2),
+    mode = "lines",
+    inherit = FALSE,
+    showlegend = FALSE
+  ) %>%
+  add_annotations(
+    x = "2022-05-15",     # Left-aligned with start date
+    y = texty,
+    text = "+2.6 million (9 quarters)",
+    showarrow = FALSE,
+    xanchor = "left",     # Left-align text
+    font = list(color = "grey20", size = 12)
+  )
+plot
+```
+
+<p class="subtitle"><b>Source:</b> Statistics Canada</p>
