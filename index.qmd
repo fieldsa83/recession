@@ -8,12 +8,12 @@ format:
     self-contained: true
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 library(plotly)
 options(plotly.config.displayModeBar = FALSE)
 ```
-
 
 ::: {style="font-size: 12pt; font-weight: bold; margin-bottom: 10px; margin-top: 0px"}
 S&P 500 declines indexed from market peaks
