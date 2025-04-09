@@ -2,7 +2,7 @@ name: Update Visualization
 
 on:
   schedule:
-    - cron: '0 17 * * 1-5'  # Run at 5 PM UTC (market close) on weekdays
+    - cron: '30 21 * * 1-5'  # Run at 5 PM UTC (market close) on weekdays
   workflow_dispatch:        # Allow manual triggering
 
 jobs:
