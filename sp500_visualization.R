@@ -83,7 +83,7 @@ all_series <- all_series %>%
       start_date == "2007-10-09" ~ "2008/09 recession (2007-10-09 to 2013-03-28)",
       start_date == "2020-02-19" ~ "2020 pandemic (2020-02-19 to 2020-08-18)",
       start_date == "2022-01-03" ~ "2022/2023 wokecession (2022-01-03 to 2024-01-19)",
-      start_date == "2025-02-19" ~ "2025 Bidencession (2025-02-19 to present)"
+      start_date == "2025-02-19" ~ "2025 Bidencession (2025-02-19 to 2025-06-27)"
     )
   ) %>%
   ungroup()
