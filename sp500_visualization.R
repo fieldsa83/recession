@@ -9,7 +9,7 @@ library(lubridate)
 library(plotly)
 
 # Custom color palette
-custom_colors <- c( "#4CAF50", "#FF6B6B", "#5D9CEC", "#9C27B0") # Red, Green, Blue, Purple
+custom_colors <- c( "#4CAF50", "#FF6B6B", "#5D9CEC", "#9C27B0", "#fdc500") # Red, Green, Blue, Purple
 
 # Download S&P 500 data using tomorrow's date to ensure we get today's data
 tomorrow_date <- Sys.Date() + 1
@@ -71,9 +71,10 @@ series1 <- create_indexed_series(sp500_df, as.Date("2007-10-09"))
 series2 <- create_indexed_series(sp500_df, as.Date("2020-02-19"))
 series3 <- create_indexed_series(sp500_df, as.Date("2022-01-03"))
 series4 <- create_indexed_series(sp500_df, as.Date("2025-02-19"))
+series5 <- create_indexed_series(sp500_df, as.Date("2026-01-27"))
 
 # Combine the series for plotting
-all_series <- rbind(series1, series2, series3, series4)
+all_series <- rbind(series1, series2, series3, series4, series5)
 
 # Create custom legend labels
 all_series <- all_series %>%
@@ -83,7 +84,8 @@ all_series <- all_series %>%
       start_date == "2007-10-09" ~ "2008/09 recession (2007-10-09 to 2013-03-28)",
       start_date == "2020-02-19" ~ "2020 pandemic (2020-02-19 to 2020-08-18)",
       start_date == "2022-01-03" ~ "2022/2023 wokecession (2022-01-03 to 2024-01-19)",
-      start_date == "2025-02-19" ~ "2025 Bidencession (2025-02-19 to 2025-06-27)"
+      start_date == "2025-02-19" ~ "2025 Bidencession (2025-02-19 to 2025-06-27)",
+      start_date == "2026-01-27" ~ "2026 Bidencession (2026-01-27 to present)"
     )
   ) %>%
   ungroup()
@@ -93,13 +95,15 @@ all_series$label <- factor(all_series$label,
                            levels = c("2008/09 recession (2007-10-09 to 2013-03-28)", 
                                       "2020 pandemic (2020-02-19 to 2020-08-18)", 
                                       "2022/2023 wokecession (2022-01-03 to 2024-01-19)",
-                                      "2025 Bidencession (2025-02-19 to 2025-06-27)"))
+                                      "2025 Bidencession (2025-02-19 to 2025-06-27)",
+                                      "2026 Bidencession (2026-01-27 to present)"
+                                      ))
 
 
 
 
 # Create plotly plot with no title - optimized for Quarto embedding
-sp500_plot <- plot_ly(data = all_series, x = ~days_since_peak, y = ~pct_change, 
+plot_ly(data = all_series, x = ~days_since_peak, y = ~pct_change, 
                       color = ~label, 
                       colors = custom_colors,
                       type = 'scatter', 
