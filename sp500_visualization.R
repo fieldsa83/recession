@@ -106,7 +106,7 @@ all_series$label <- factor(all_series$label,
 
 
 # Create plotly plot with no title - optimized for Quarto embedding
-plot_ly(data = all_series, x = ~days_since_peak, y = ~pct_change, 
+sp500_plot <- plot_ly(data = all_series, x = ~days_since_peak, y = ~pct_change, 
                       color = ~label, 
                       colors = custom_colors,
                       type = 'scatter', 
