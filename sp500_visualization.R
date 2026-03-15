@@ -13,7 +13,7 @@ custom_colors <- c( "#4CAF50", "#FF6B6B", "#5D9CEC", "#9C27B0", "#fdc500") # Red
 
 # Download S&P 500 data using tomorrow's date to ensure we get today's data
 tomorrow_date <- Sys.Date() + 1
-sp500 <- getSymbols("^GSPC", from = "2007-01-01", to = tomorrow_date, auto.assign = FALSE)
+sp500 <- getSymbols("^GSPC", from = "2007-01-01", auto.assign = FALSE)
 
 # Convert to data frame
 sp500_df <- data.frame(Date = index(sp500), coredata(sp500))
