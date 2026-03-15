@@ -1,5 +1,5 @@
 ---
-title: "Comparing crises"
+title: "Comparing crises 1"
 format: 
   html:
     theme: cosmo
