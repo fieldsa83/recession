@@ -20,6 +20,9 @@ sp500_df <- data.frame(Date = index(sp500), coredata(sp500))
 sp500_df <- sp500_df %>% select(Date, GSPC.Adjusted)
 sp500_df$Date <- as.Date(sp500_df$Date)
 
+#sp500_df <- sp500_df %>%
+#  add_row(Date = as.Date("2026-02-03"), GSPC.Adjusted = 6735.12)
+
 # Function to create indexed series from a particular date until it turns positive
 create_indexed_series <- function(data, start_date) {
   # Filter data from start date onwards
@@ -103,7 +106,7 @@ all_series$label <- factor(all_series$label,
 
 
 # Create plotly plot with no title - optimized for Quarto embedding
-sp500_plot <- plot_ly(data = all_series, x = ~days_since_peak, y = ~pct_change, 
+plot_ly(data = all_series, x = ~days_since_peak, y = ~pct_change, 
                       color = ~label, 
                       colors = custom_colors,
                       type = 'scatter', 
