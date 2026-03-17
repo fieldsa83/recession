@@ -25,7 +25,7 @@ S&P 500 declines indexed from market peaks
 #| message: false
 
 # Source the script that creates the plot
-source("sp500_visualization.R")
+source("sp500_visualization.R", local = TRUE)
 sp500_plot <- sp500_plot %>% config(displayModeBar = FALSE)
 
 # Display the plot
