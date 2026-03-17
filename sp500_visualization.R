@@ -8,7 +8,6 @@ library(dplyr)
 library(lubridate)
 library(plotly)
 
-
 # Custom color palette
 custom_colors <- c( "#4CAF50", "#FF6B6B", "#5D9CEC", "#9C27B0", "#fdc500") # Red, Green, Blue, Purple
 
