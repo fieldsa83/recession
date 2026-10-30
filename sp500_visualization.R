@@ -9,7 +9,7 @@ library(dplyr)
 library(lubridate)
 library(plotly)
 
-# Custom color palette for the historical episodes (the current one is drawn black dashed)
+# Custom color palette for the historical episodes (the current one is drawn solid black)
 custom_colors <- c("#4CAF50", "#FF6B6B", "#5D9CEC", "#9C27B0", "#fdc500")
 
 # Download S&P 500 data using tomorrow's date to ensure we get today's data
@@ -86,7 +86,7 @@ series4 <- create_indexed_series(sp500_df, as.Date("2025-02-19"))
 series5 <- create_indexed_series(sp500_df, as.Date("2026-01-27"), cap_date = as.Date("2026-04-15"))
 series6 <- create_indexed_series(sp500_df, as.Date("2026-10-06"))
 
-# Historical episodes (coloured) and the current episode (black dashed) kept separate
+# Historical episodes (coloured) and the current episode (solid black) kept separate
 hist_series <- rbind(series1, series2, series3, series4, series5)
 
 hist_labels <- c("2008/09 recession (2007-10-09 to 2013-03-28)",
@@ -127,7 +127,7 @@ sp500_plot <- plot_ly(data = hist_series, x = ~days_since_peak, y = ~pct_change,
     type = 'scatter',
     mode = 'lines',
     color = I("black"),
-    line = list(color = "black", dash = "dash", width = 2.2),
+    line = list(color = "black", width = 1.4),
     inherit = FALSE
   ) %>%
   layout(
