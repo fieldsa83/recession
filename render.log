@@ -24,7 +24,7 @@ processing file: index.qmd
   link-citations: true
   date-format: long
   lang: en
-  title: Comparing crises 1
+  title: Comparing crises
   theme: cosmo
   
 Output created: index.html
