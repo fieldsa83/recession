@@ -1,0 +1,31 @@
+[31m
+
+processing file: index.qmd
+[39m1/5                  
+2/5 [setup]          
+3/5                  
+4/5 [unnamed-chunk-1]
+5/5                  
+[31moutput file: index.knit.md
+
+[39m[1mpandoc [22m
+  to: html
+  output-file: index.html
+  standalone: true
+  embed-resources: true
+  self-contained: true
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  
+[1mmetadata[22m
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  title: Comparing crises 1
+  theme: cosmo
+  
+Output created: index.html
+
