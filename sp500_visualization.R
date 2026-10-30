@@ -134,7 +134,7 @@ sp500_plot <- plot_ly(data = hist_series, x = ~days_since_peak, y = ~pct_change,
     margin = list(
       l = 80,
       r = 50,
-      t = 50,  # Reduced top margin since there's no title
+      t = 160,  # room for the 6-line legend above the plot
       b = 100,
       pad = 10
     ),
@@ -163,10 +163,11 @@ sp500_plot <- plot_ly(data = hist_series, x = ~days_since_peak, y = ~pct_change,
     legend = list(
       orientation = "v",
       xanchor = "left",
-      yanchor = "top",
+      yanchor = "bottom",  # legend sits entirely above the plot area
       x = 0,
-      y = 1.5
+      y = 1.02
     ),
+    height = 620,  # taller so the plot area keeps its size under the legend
     autosize = TRUE,
     config = list(
       displayModeBar = FALSE,
