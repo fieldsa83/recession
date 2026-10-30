@@ -2,7 +2,7 @@ name: Update Visualization
 
 on:
   schedule:
-    - cron: '30 21 * * 1-5'  # Run at 5 PM UTC (market close) on weekdays
+    - cron: '30 21 * * 1-5'  # 21:30 UTC (after US market close) on weekdays
   workflow_dispatch:        # Allow manual triggering
 
 jobs:
@@ -13,16 +13,17 @@ jobs:
       R_LIBS_USER: ${{ github.workspace }}/R/library
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Set up R
+      id: setup-r
       uses: r-lib/actions/setup-r@v2
       
     - name: Cache R packages
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ env.R_LIBS_USER }}
-        key: ${{ runner.os }}-r-${{ hashFiles('**/sp500_visualization.R') }}-1
+        key: ${{ runner.os }}-r-${{ steps.setup-r.outputs.installed-r-version }}-${{ hashFiles('**/sp500_visualization.R') }}-2
         
     - name: Install system dependencies
       run: |
@@ -32,7 +33,7 @@ jobs:
     - name: Install R packages
       run: |
         Rscript -e 'if(!dir.exists(Sys.getenv("R_LIBS_USER"))) dir.create(Sys.getenv("R_LIBS_USER"), recursive=TRUE)'
-        Rscript -e 'install.packages(c("quantmod", "dplyr", "lubridate", "plotly", "htmlwidgets"), repos = "https://cloud.r-project.org/", lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'install.packages(c("TTR", "quantmod", "dplyr", "lubridate", "plotly", "htmlwidgets"), repos = "https://cloud.r-project.org/", lib=Sys.getenv("R_LIBS_USER"))'
         
     - name: Install Quarto
       uses: quarto-dev/quarto-actions/setup@v2
