@@ -113,6 +113,7 @@ hist_series$label <- factor(hist_series$label, levels = hist_labels)
 
 # Create plotly plot with no title - optimized for Quarto embedding
 sp500_plot <- plot_ly(data = hist_series, x = ~days_since_peak, y = ~pct_change,
+        height = 620,  # widget height: frame and chart grow together (room for legend above)
         color = ~label,
         colors = custom_colors,
         type = 'scatter',
@@ -167,7 +168,6 @@ sp500_plot <- plot_ly(data = hist_series, x = ~days_since_peak, y = ~pct_change,
       x = 0,
       y = 1.02
     ),
-    height = 620,  # taller so the plot area keeps its size under the legend
     autosize = TRUE,
     config = list(
       displayModeBar = FALSE,

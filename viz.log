@@ -64,6 +64,3 @@ The following object is masked from ‘package:graphics’:
 
     layout
 
-Warning message:
-Specifying width/height in layout() is now deprecated.
-Please specify in ggplotly() or plot_ly() 
