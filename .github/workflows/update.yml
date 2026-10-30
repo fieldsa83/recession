@@ -39,7 +39,13 @@ jobs:
       uses: quarto-dev/quarto-actions/setup@v2
         
     - name: Run visualization script
-      run: Rscript sp500_visualization.R
+      run: |
+        set -o pipefail
+        if ! Rscript sp500_visualization.R 2>&1 | tee viz.log; then
+          msg=$(tail -n 25 viz.log | sed ':a;N;$!ba;s/%/%25/g;s/\n/%0A/g')
+          echo "::error title=R script failed::$msg"
+          exit 1
+        fi
         
     - name: Render Quarto document
       run: |
